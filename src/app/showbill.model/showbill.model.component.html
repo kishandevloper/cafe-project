@@ -1,0 +1,32 @@
+<h1 mat-dialog-title class="text-center">Items</h1>
+<div mat-dialog-content>
+  <table class="table table">
+    <thead>
+      <tr>
+        <th class="text-center">Name</th>
+        <th class="text-center">Category</th>
+        <th class="text-center">Price</th>
+        <th class="text-center">Quantity</th>
+        <th class="text-center">Total</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of data.item_detail">
+      <tr>
+        <td class="text-center tbl-property">
+          <p>{{ item.item_name }}</p>
+        </td>
+        <td class="tbl-property text-center">{{ item.category }}</td>
+        <td class="text-center tbl-property">{{ item.price }}</td>
+        <td class="text-center tbl-property">{{ item.quantity }}</td>
+        <td class="text-center tbl-property">{{ item.total }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <b class="text-end text-dark">Total-amount : {{ data.total_amount }} </b>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

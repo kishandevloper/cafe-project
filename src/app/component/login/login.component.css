@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  background-size: cover;
+  background-image: url("https://images.pexels.com/photos/5812847/pexels-photo-5812847.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+
+  opacity: 0.9;
+}
+/* .card {
+  background-color: transparent;
+  opacity: 0.8;
+  color: white;
+} */
+.form-control:focus {
+  outline: none;
+  background-color: #ededeb;
+  box-shadow: none;
+}
+.card-body {
+  padding: 29px;
+}
+.form-control {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+}
+
+.link {
+  font-size: 15px;
+}
+@media screen and (max-width: 902px) {
+  .link {
+    font-size: 13px;
+  }
+}
+
+.card {
+  height: 468px;
+  width: 496px;
+  max-height: 468px;
+  max-width: 496px;
+}
+
+.m-body{
+  padding-top: 57px;
+}
+@media screen and (max-width: 842px) {
+  .m-body{
+    padding-top: 15vh;
+    margin: 12px;
+  }
+}
+body{
+  background-color: black;
+}

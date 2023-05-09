@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@300&display=swap");
+
+body {
+  font-family: "Lato", sans-serif;
+}
+span {
+  z-index: 0;
+}
+
+.btn-group img {
+  height: 50px;
+}
+
+.nav-drop {
+  margin-left: -50px;
+  background-color: rgb(240, 239, 237);
+}
+.nav-drop a:hover {
+  background-color: rgb(192, 178, 178);
+  color: black;
+}
+.dropdown-item {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+  #hellouser {
+    display: none;
+  }
+
+  .btn-group img {
+    height: 40px;
+  }
+  .nav-drop {
+    margin-left: -135px;
+    background-color: rgb(240, 239, 237);
+  }
+}
+
+mat-sidenav {
+  width: 327px;
+  height: 100vh;
+  /* height: calc(100vh - 64px); */
+
+  background-image: url("https://images.unsplash.com/photo-1482350325005-eda5e677279b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.mat-toolbar {
+  background-color: #dfd4d4e7;
+  color: #293855;
+  font-family: "Kanit", sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+
+  display: flex;
+  justify-content: space-between;
+}
+.menu-button {
+  width: 93%;
+  display: flex;
+
+  font-size: 1.3rem;
+  margin: 0px 10px;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  /* background-color: #764b2ac4; */
+  background-color: #eeeeee;
+}
+
+.menu-button:hover {
+  color: black;
+  background-color: #eeeeee;
+}
+
+#managecafe,
+#onlineorders,
+#oflineorders {
+  background-color: #764b2ad3;
+  margin: 0px 10px;
+}
+.menu-buttonx {
+  width: 100%;
+  display: flex;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  /* background-color: #764b2ac4; */
+
+  color: white;
+  background: transparent;
+}
+.menu-buttonx:hover {
+  background: rgba(255, 255, 255, 0.507);
+  color: black;
+}
+
+.icon {
+  font-size: 1.7rem;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 64px);
+
+  /* background-image: url("https://img.freepik.com/premium-photo/abstract-blur-coffee-shop-cafe-restaurant-background-vintage-effect-filter_1339-159934.jpg"); */
+  background-image: url("https://global.discourse-cdn.com/pocketgems/uploads/episodeinteractive/original/3X/7/d/7d79a9c4c27f085b79692285c0ef119f8b39830b.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media screen and (max-width: 1700px) {
+  mat-sidenav {
+    width: 240px;
+  }
+  .menu-button {
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (min-width: 1110px) {
+  mat-sidenav {
+    margin: 5px;
+  }
+}
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mat-sidenav-content {
+  padding: 10px;
+}
+
+.logox {
+  height: 49px;
+  border-radius: 100%;
+  animation-duration: 5s;
+  animation-name: arrow;
+  animation-iteration-count: infinite;
+}
+
+@keyframes arrow {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

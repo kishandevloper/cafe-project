@@ -1,0 +1,14 @@
+@media screen and (max-width: 902px) {
+  .image {
+    height: 200px;
+    padding-top: 25px;
+  }
+}
+
+
+.image {
+  height: 200px;
+  margin: 0 auto;
+  display: block;
+  width: 212px;
+}

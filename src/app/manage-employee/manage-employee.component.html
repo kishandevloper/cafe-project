@@ -1,0 +1,22 @@
+<div class="dmain">
+  <div class="card" style="padding: 0px">
+    <div class="card-body" style="padding: 0">
+      <div
+        class="d-flex align-items-center justify-content-between bg-light p-2"
+      >
+        <span class="head ms-2 position-sticky">Manage Employee</span>
+        <button class="btn btn-sm btn-success" role="button" (click)="openDialog()">
+          <i class="fa-solid fa-plus"> &nbsp;</i> Add Employee
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2 bg-light position-sticky top-0" style="z-index: 0">
+    <div class="card-body" style="padding: 0; overflow: hidden">
+      <mat-form-field class="ms-2 me-2 mt-2 col-12">
+        <mat-label>Filter</mat-label>
+        <input matInput placeholder="Search Empolyee" />
+      </mat-form-field>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.tbl-property {
+  font-size: 18px;
+  padding: 6vh 14px;
+}
+
+
+.tbl-img {
+  height: 110px;
+  width: 130px;
+}
+
+.pop-form {
+  overflow: hidden;
+}
+.filter-card {
+  position: sticky;
+  top: 10vh;
+  z-index: 1;
+}
+
+@media screen and (max-width: 842px) {
+  .tbl-property {
+    font-size: 17px;
+    padding: 3vh 14px;
+  }
+
+  .tbl-img {
+    height: 100px;
+    width: 100px;
+  }
+}

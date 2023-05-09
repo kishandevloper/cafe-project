@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.card {
+  border: 1px solid #9bb4e3;
+}
+
+.dmain {
+  background-color: transparent;
+  color: #293855;
+  padding: 10px;
+  
+}
+.head {
+  font-size: 22px;
+  font-weight: 400;
+  padding: 2px;
+  font-weight: 400;
+}
+.prop-hover :hover {
+  color: #285276e1;
+  font-size: 18px;
+}
+@media screen and (max-width: 500px) {
+  .head {
+    font-size: 5vw;
+  }
+}
+
+thead tr th {
+  color: #293855;
+}
+tbody tr td {
+  color: #796993;
+}
+/* tbody tr {
+  transform: scale(1);
+  transition: all 1s ease;
+}
+tbody tr:hover {
+  box-shadow: 5px 5px 10px #8c7777;
+  transform: scale(1.01);
+  transition: all 1s ease;
+} */

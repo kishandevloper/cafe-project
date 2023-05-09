@@ -1,0 +1,44 @@
+<ngx-ui-loader></ngx-ui-loader>
+<div class="dmain">
+  <p class="head">Dashboard</p>
+  <hr style="margin-top: -4px" />
+  <div class="d-flex row mt-2">
+    <div class="col-md-4 col-sm-12 mt-3">
+      <div class="card box">
+        <div class="card-body">
+          <p class="text-center d-name">Total Category</p>
+          <p class="text-center" style="font-size: 4vh">{{ categorys }}</p>
+          <div class="d-flex justify-content-center">
+            <button class="btun" (click)="gotocategory()">View Category</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mt-3">
+      <div class="card box">
+        <div class="card-body">
+          <p class="text-center d-name">Total Product</p>
+          <p class="text-center" style="font-size: 4vh">{{ item }}</p>
+
+          <div class="button d-flex justify-content-center">
+            <button class="btun" routerLink="/home/manageitem">
+              View Product
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12 mt-3">
+      <div class="card box">
+        <div class="card-body">
+          <p class="text-center d-name">Total Bill</p>
+          <p class="text-center" style="font-size: 4vh">{{ bills }}</p>
+
+          <div class="button d-flex justify-content-center">
+            <button class="btun" routerLink="/home/viewbill">View Bill</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

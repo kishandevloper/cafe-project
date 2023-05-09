@@ -1,0 +1,210 @@
+<ngx-ui-loader ></ngx-ui-loader>
+<div class="dmain">
+  <div class="card" style="padding: 0px">
+    <div class="card-body" style="padding: 0">
+      <div
+        class="d-flex align-items-center justify-content-between bg-light p-2"
+      >
+        <span class="head ms-2">Manage order</span>
+        <button
+          class="btn col-md-2 col-sm-2 col-6 btn-success"
+          role="button"
+          (click)="submitbill()"
+        >
+          <i class="fa-solid fa-print">&nbsp;</i> Get & Submit Bill
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-2 bg-light filter-card" style="z-index: 1">
+    <div class="card-body" style="overflow: hidden">
+      <p class="font-weight-bold ms-2" style="font-size: medium">
+        Customer Details :
+      </p>
+      <form action="" [formGroup]="customerdetailform">
+        <div class="row c_detail">
+          <div class="col-md-3 col-12 col-sm-12 pe-3">
+            <mat-form-field style="width: 100%">
+              <mat-label>Name :</mat-label>
+              <input
+                matInput
+                placeholder="Enter Name"
+                formControlName="customer_name"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-12 col-sm-12 pe-3">
+            <mat-form-field style="width: 100%">
+              <mat-label>Email :</mat-label>
+              <input
+                matInput
+                placeholder="Enter Email"
+                formControlName="email"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-6 col-sm-6 pe-3">
+            <mat-form-field style="width: 100%">
+              <mat-label>Contact Number :</mat-label>
+              <input
+                matInput
+                placeholder="Enter Contact"
+                formControlName="contact_no"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-6 col-sm-6 pe-3">
+            <mat-form-field appearance="fill" style="width: 100%">
+              <mat-label>Payment Method</mat-label>
+              <select matNativeControl required formControlName="pay_method">
+                <option value="Cash">Cash</option>
+                <option value="Upi">Upi</option>
+                <option value="Net_banking">Net Banking</option>
+              </select>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mt-2 bg-light filter-card" style="z-index: 1">
+    <div class="card-body" style="overflow: hidden">
+      <p class="font-weight-bold ms-2" style="font-size: medium">
+        Select Product:
+      </p>
+      <form action="" [formGroup]="additemform">
+        <div class="row c_detail mt-2">
+          <div class="col-md-3 col-6 col-sm-6 pe-2">
+            <mat-form-field appearance="fill" style="width: 100%">
+              <mat-label>Category</mat-label>
+              <mat-select
+                formControlName="category"
+                (selectionChange)="oncategoryselect($event)"
+              >
+                <mat-option
+                  *ngFor="let category of categorys"
+                  [value]="category"
+                >
+                  {{ category }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-3 col-sm-6 col-6 pe-2">
+            <mat-form-field appearance="fill" style="width: 100%">
+              <mat-label>Product</mat-label>
+              <mat-select
+                [disabled]="additemform.controls['category'].invalid"
+                formControlName="item_name"
+                (selectionChange)="onselectproduct($event)"
+                requi
+              >
+                <mat-option
+                  *ngFor="let item of items"
+                  [value]="item.item_name"
+                  [disabled]="!item.isenable"
+                >
+                  {{ item.item_name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 col-4 col-sm-4 pe-2">
+            <mat-form-field style="width: 100%">
+              <mat-label>Price </mat-label>
+              <input
+                value="0"
+                matInput
+                placeholder="price"
+                formControlName="price"
+                (change)="calculatetotal()"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 col-4 col-sm-4 pe-2">
+            <mat-form-field style="width: 100%">
+              <mat-label>Quantity </mat-label>
+              <input
+                value="0"
+                matInput
+                placeholder="Quantity"
+                formControlName="quantity"
+                (change)="calculatetotal()"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-2 col-4 col-sm-4 pe-2">
+            <mat-form-field style="width: 100%">
+              <mat-label>Total</mat-label>
+              <input
+                value="0"
+                matInput
+                placeholder="total"
+                formControlName="total"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <button
+              class="btn btn-success btn-md"
+              [disabled]="additemform.invalid"
+              (click)="additem()"
+            >
+              Add
+            </button>
+          </div>
+          <div>
+            <button class="btn btn-secondary btn-md">
+              <i class="fa-solid fa-sack-dollar">&nbsp;</i>Total Amount :
+              {{ total_amount }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card bg-light mt-3 mb-4 p-3 " >
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th class="text-center">Name</th>
+              <th class="text-center">Category</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Total</th>
+              <th class="text-center">Delete</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of billitems">
+            <tr>
+              <td class="text-center tbl-property">
+                <p>{{ item.item_name }}</p>
+              </td>
+
+              <td class="tbl-property text-center">{{ item.category }}</td>
+              <td class="text-center tbl-property">{{ item.price }}</td>
+              <td class="text-center tbl-property">{{ item.quantity }}</td>
+              <td class="text-center tbl-property">{{ item.total }}</td>
+              <td class="text-center tbl-property prop-hover">
+                <i
+                  class="fa-solid fa-trash"
+                  (click)="deleteitem(item.item_name, item.total)"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

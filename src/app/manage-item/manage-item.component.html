@@ -1,0 +1,104 @@
+<ngx-ui-loader ></ngx-ui-loader>
+<div class="dmain">
+  <div class="card " style="padding: 0px;">
+    <div class="card-body" style="padding: 0">
+      <div
+        class="d-flex align-items-center justify-content-between bg-light p-2"
+      >
+        <span class="head ms-2">Manage Food Item</span>
+        <button
+          class="btn btn-sm btn-success"
+          role="button"
+          (click)="addproduct()"
+        >
+          <i class="fa-solid fa-plus"> &nbsp;</i> Add Item
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card mt-2 bg-light">
+    <div class="card-body" style="padding: 0; overflow: hidden">
+      <mat-form-field class="ms-2 me-2 mt-2 col-12">
+        <mat-label>Filter</mat-label>
+        <input
+          matInput
+          placeholder="Search Category"
+          [(ngModel)]="serchcategory"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+
+
+
+  <div class="card bg-light mt-3 mb-3 p-3 item-box">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="text-center">Image</th>
+              <th class="text-center">Name</th>
+              <th class="text-center">Category</th>
+              <th class="text-center">Description</th>
+              <th class="text-center">Price</th>
+              <th class="text-center">Action</th>
+              <th class="text-center">Enable/Desable</th>
+            </tr>
+          </thead>
+          <tbody
+            *ngFor="
+              let item of items | filtercategory : serchcategory : searchby
+            "
+          >
+            <tr>
+              <td class="text-center">
+                <img
+                  style="cursor: pointer"
+                  class="tbl-img"
+                  [src]="item.imagesrc"
+                  alt=""
+                  (click)="showimage(item.imagesrc, item.item_name)"
+                />
+              </td>
+              <td class="text-center tbl-property">
+                <p>{{ item.item_name }}</p>
+              </td>
+
+              <td class="tbl-property">{{ item.category }}</td>
+              <td class="text-center tbl-property">
+                {{ item.description }}
+              </td>
+              <td class="text-center tbl-property">{{ item.price }}</td>
+              <td class="text-center tbl-property">
+                <div class="d-flex justify-content-center">
+                  <div class="prop-hover" style="min-width: 2vw">
+                    <i class="fa-solid fa-pen" (click)="editproduct(item)"></i>
+                  </div>
+                  <div class="prop-hover ms-3" style="min-width: 2vw">
+                    <i
+                      class="fa-solid fa-trash prop-hover"
+                      (click)="deleteitem(item._id, item.category)"
+                    ></i>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center tbl-property">
+                <mat-slide-toggle
+                  color="primary"
+                  checked="{{ item.isenable }}"
+                  (change)="changedtoggle($event, item)"
+                >
+                </mat-slide-toggle>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

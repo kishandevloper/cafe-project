@@ -1,0 +1,320 @@
+<mat-toolbar>
+  <div>
+    <button
+      mat-icon-button
+      *ngIf="sidenav.mode === 'over'"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    <img
+      class="logox"
+      *ngIf="sidenav.mode === 'side'"
+      src="../../../assets/logo.jpg"
+      alt=""
+    />
+    <span class="ms-2">Drew cafe</span>
+  </div>
+  <div class="btn-group me-3" dropdown>
+    <img
+      src="{{ user.profile }}"
+      id="button-basic"
+      dropdownToggle
+      type="button"
+      class="dropdown-toggle rounded-circle"
+      aria-controls="dropdown-basic"
+    /><span
+      *ngIf="user.role == 'admin'"
+      class="ms-2"
+      id="hellouser"
+      style="font-size: 15px"
+      >Hello Admin</span
+    ><span
+      *ngIf="user.role == 'user'"
+      class="ms-2"
+      id="hellouser"
+      style="font-size: 15px"
+      >Hello {{ user.name }}</span
+    >
+
+    <ul
+      id="dropdown-basic"
+      *dropdownMenu
+      class="dropdown-menu nav-drop"
+      role="menu"
+      aria-labelledby="button-basic"
+    >
+      <li role="menuitem">
+        <a class="dropdown-item" routerLink="/home/viewprofile"
+          ><i class="fa-solid fa-address-card">&nbsp;</i>&nbsp;view Profile</a
+        >
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" routerLink="/home/change-password"
+          ><i class="fa-solid fa-key">&nbsp;</i>&nbsp;Change Password</a
+        >
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" href="/index"
+          ><i class="fa-brands fa-golang">&nbsp;</i>&nbsp;GO website</a
+        >
+      </li>
+      <li class="divider dropdown-divider"></li>
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="logout()"
+          ><i class="fa-solid fa-right-from-bracket">&nbsp;</i>&nbsp;Log out</a
+        >
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav mode="over" #sidenav>
+    <!-- <p>mode="over"</p> -->
+    <div style="background-color: #0000009e; display: block">
+      <img class="mt-4 my-4" src="../../../assets/logo3.png" alt="" />
+    </div>
+    <mat-divider class="mx-2 bg-light"></mat-divider>
+
+    <a id="btn1" class="menu-button mt-4">
+      <span>
+        <i class="fa-solid fa-utensils icon"></i>&nbsp; &nbsp; Manage Cafe</span
+      >
+    </a>
+    <div id="managecafe" style="display: none">
+      <a class="menu-buttonx" routerLink="/home/dashboard" (click)="navclose()">
+        <span
+          ><i class="fa-solid fa-gauge icon"></i>&nbsp; &nbsp;Dashboard</span
+        >
+      </a>
+      <mat-divider class="mx-1" style="background-color: rgba(240, 248, 255, 0.329);"></mat-divider>
+      <a
+        class="menu-buttonx"
+        routerLink="/home/managecategory"
+        (click)="navclose()"
+      >
+        <span>
+          <i class="fa-solid fa-utensils icon"></i>&nbsp; &nbsp; Manage
+          category</span
+        >
+      </a>
+      <mat-divider class="mx-1" style="background-color: rgba(240, 248, 255, 0.329);"></mat-divider>
+      <a
+        class="menu-buttonx"
+        routerLink="/home/manageitem"
+        (click)="navclose()"
+      >
+        <span>
+          <i class="fa-solid fa-pizza-slice icon"></i>&nbsp; &nbsp; Manage
+          item</span
+        >
+      </a>
+      <mat-divider class="mx-1" style="background-color: rgba(240, 248, 255, 0.329);"></mat-divider>
+      <a
+        class="menu-buttonx"
+        routerLink="/home/manage-employee"
+        (click)="navclose()"
+      >
+        <span>
+          <i class="fa-solid fa-users"></i>&nbsp; &nbsp; Manage Employee</span
+        >
+      </a>
+    </div>
+    <div class="mt-2"></div>
+
+    <a id="btn2" class="menu-button">
+      <span>
+        <i class="fa-solid fa-earth-asia"></i>&nbsp; &nbsp; online orders</span
+      >
+    </a>
+    <div id="onlineorders" style="display: none">
+      <a
+        class="menu-buttonx"
+        routerLink="/home/all-orders"
+        (click)="navclose()"
+      >
+        <span>
+          <i class="fa-solid fa-arrow-down-wide-short icon"></i>&nbsp; &nbsp;
+          All orders
+        </span>
+      </a>
+    </div>
+
+    <div class="mt-2"></div>
+
+    <a id="btn3" class="menu-button">
+      <span>
+        <i class="fa-solid fa-utensils icon"></i>&nbsp; &nbsp; offline orders
+      </span>
+    </a>
+    <div id="oflineorders" style="display: none">
+      <a
+        class="menu-buttonx"
+        routerLink="/home/manageorder"
+        (click)="navclose()"
+      >
+        <span
+          ><i class="fa-solid fa-sort icon"></i>&nbsp; &nbsp; Manage Order</span
+        >
+      </a>
+      <mat-divider class="mx-1" style="background-color: rgba(240, 248, 255, 0.329);"></mat-divider>
+      <a class="menu-buttonx" routerLink="/home/viewbill" (click)="navclose()">
+        <span>
+          <i class="fa-solid fa-money-bills icon"></i>&nbsp; &nbsp; View
+          bill</span
+        >
+      </a>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- <div class="d-flex" style="height: 100vh">
+  <div id="mySidenav" class="sidenav">
+    <div class="logo d-flex justify-content-between align-items-center">
+      <div>
+        <i
+          *ngIf="isshow"
+          class="fa-solid fa-arrow-right arrow text-light ms-2"
+        ></i>
+      </div>
+
+      <img src="../../../assets/logo3.png" alt="" />
+
+      <i
+        class="fa fa-window-close text-light closebtn"
+        style="font-size: 25px"
+        aria-hidden="true"
+        (click)="close()"
+      ></i>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="menu">
+        <a
+          routerLinkActive="active"
+          routerLink="/home/dashboard"
+          (click)="close()"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ><i class="fa-solid fa-gauge"></i>&nbsp; Dashbord</a
+        >
+        <a
+          routerLink="/home/managecategory"
+          routerLinkActive="router-link-active"
+          (click)="close()"
+          ><i class="fa-solid fa-utensils"></i>&nbsp; Manage category
+        </a>
+        <a
+          routerLink="/home/manageitem"
+          routerLinkActive="router-link-active"
+          (click)="close()"
+          ><i class="fa-solid fa-pizza-slice"></i>&nbsp; Manage item</a
+        >
+        <a
+          routerLink="/home/manageorder"
+          routerLinkActive="router-link-active"
+          (click)="close()"
+          ><i class="fa-solid fa-sort"></i>&nbsp; Manage Order</a
+        >
+        <a
+          routerLink="/home/viewbill"
+          routerLinkActive="router-link-active"
+          (click)="close()"
+          ><i class="fa-solid fa-money-bills"></i>&nbsp; View bill</a
+        >
+        <mat-divider class="my-2 mx-2 bg-light"></mat-divider>
+        <a
+          routerLink="/home/viewbill"
+          routerLinkActive="router-link-active"
+          (click)="close()"
+          ><i class="fa-solid fa-money-bills"></i>&nbsp;All Orders</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="p-2 d-flex justify-content-between align-items-center nav">
+      <div
+        class="d-flex justify-content-center align-items-center"
+        style="height: 41px"
+      >
+        <span
+          *ngIf="isshow"
+          id="onespan"
+          style="font-size: 30px; cursor: pointer; margin-top: -4px"
+          (click)="opennav()"
+          >&#9776;</span
+        >
+        <a class="ps-2" id="brand">Drew's Cafe </a>
+      </div>
+      <div class="btn-group me-3" dropdown>
+        <img
+          src="{{ user.profile }}"
+          id="button-basic"
+          dropdownToggle
+          type="button"
+          class="dropdown-toggle rounded-circle"
+          aria-controls="dropdown-basic"
+        /><span
+          *ngIf="user.role == 'admin'"
+          class="ms-2 mt-3"
+          id="hellouser"
+          style="font-size: 15px"
+          >Hello Admin</span
+        ><span
+          *ngIf="user.role == 'user'"
+          class="ms-2 mt-3"
+          id="hellouser"
+          style="font-size: 15px"
+          >Hello {{ user.name }}</span
+        >
+
+        <ul
+          id="dropdown-basic"
+          *dropdownMenu
+          class="dropdown-menu nav-drop"
+          role="menu"
+          aria-labelledby="button-basic"
+        >
+          <li role="menuitem">
+            <a class="dropdown-item" routerLink="/home/viewprofile"
+              ><i class="fa-solid fa-address-card">&nbsp;</i>&nbsp;view
+              Profile</a
+            >
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" routerLink="/home/change-password"
+              ><i class="fa-solid fa-key">&nbsp;</i>&nbsp;Change Password</a
+            >
+          </li>
+          <li role="menuitem">
+            <a class="dropdown-item" href="/index"
+              ><i class="fa-brands fa-golang">&nbsp;</i>&nbsp;GO website</a
+            >
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem">
+            <a class="dropdown-item" (click)="logout()"
+              ><i class="fa-solid fa-right-from-bracket">&nbsp;</i>&nbsp;Log
+              out</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      style="
+        background-image: url('https://img.freepik.com/premium-photo/abstract-blur-coffee-shop-cafe-restaurant-background-vintage-effect-filter_1339-159934.jpg');
+        background-repeat: no repeat;
+        background-size: cover;
+        padding: 10px;
+        height: 93vh;
+        overflow: scroll;
+      "
+    >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div> -->

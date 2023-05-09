@@ -1,0 +1,52 @@
+<div class="content">
+  <mat-chip-listbox aria-label="Fish selection">
+    <mat-chip-option selected="true" color="warn" (click)="setallitems()"
+      >All</mat-chip-option
+    >
+    <mat-chip-option
+      color="warn"
+      *ngFor="let category of categorys"
+      (click)="finditem(category)"
+      >{{ category }}</mat-chip-option
+    >
+  </mat-chip-listbox>
+
+  <div data-aos="zoom-out-up" data-aos-duration="2500">
+    <div class="item-box mb-4">
+      <div
+        class="col-12 col-md-4 col-lg-3 mt-2 col-sm-6"
+        style="padding-right: 12px; padding-top: 12px"
+        *ngFor="let item of filteritems"
+      >
+        <div class="card p-1">
+          <div class="imag-wrapper">
+            <img class="img-prod" src="{{ item.imagesrc }}" alt="" />
+            <div class="buttonx">
+              <button mat-icon-button (click)="addcart(item)">
+                <mat-icon color="basic">add_shopping_cart</mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon>favorite_border</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <mat-divider style="margin-top: 9px"></mat-divider>
+          <div class="info">
+            <p class="mt-3">{{ item.item_name }}</p>
+            <div class="price">
+              <span style="font-size: 1.3rem; padding: 9px"
+                >{{ item.price }}&#8377;</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-aos="zoom-out-down" data-aos-duration="3000">
+    <div class="mt-3 not-found col-sm-8" *ngIf="filteritems.length == 0">
+      <h1>No Items Found</h1>
+    </div>
+  </div>
+</div>

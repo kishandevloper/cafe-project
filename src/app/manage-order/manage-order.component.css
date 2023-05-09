@@ -1,0 +1,8 @@
+.row.c_detail {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tbl-property {
+  font-size: 18px;
+}
+

@@ -1,0 +1,70 @@
+<div class="background">
+  <div class="d-flex justify-content-center align-items-center m-body">
+    <div class="card">
+      <div class="card-body">
+        <img
+          src="../../../assets/logo2.png"
+          width="100px"
+          alt=""
+          style="margin: 0 auto; display: block"
+        />
+        <form [formGroup]="loginform">
+          <div class="form-group mt-2">
+            <label class="ms-1" for="username">Email :</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control mt-2"
+              autocomplete="off"
+              formControlName="email"
+            />
+          </div>
+          <div class="form-group mt-3">
+            <label class="ms-1" for="pass">Password :</label>
+            <input
+              type="{{ showpass ? 'text' : 'password' }}"
+              [ngStyle]="{ 'letter-spacing': !showpass ? '2px' : 'normal' }"
+              class="form-control mt-2"
+              autocomplete="off"
+              formControlName="password"
+            />
+          </div>
+          <div class="form-group mt-2">
+            <input type="checkbox" id="checkbox" (change)="onchange($event)" />
+            <label for="checkbox" class="ms-2">Show password</label>
+          </div>
+
+          <button class="btn btn-primary mt-3 col-12" (click)="onsubmit()">
+            Log in
+          </button>
+          <div class="d-flex justify-content-center align-items-center mt-3">
+            <hr class="col-4 col-sm-5 col-md-5" />
+            <span class="ms-4 me-4">OR</span>
+            <hr class="col-4 col-md-5" />
+          </div>
+          <div
+            class="mt-2 d-flex align-items-center justify-content-center link"
+          >
+            <span>Don 't have an acount ?</span
+            ><a
+              style="text-decoration: none; cursor: pointer"
+              class="ms-1"
+              (click)="openDialog()"
+              >Sign up</a
+            >
+          </div>
+          <div
+            class="mt-2 d-flex align-items-center justify-content-center link"
+          >
+            <a
+              style="text-decoration: none; cursor: pointer"
+              class="ms-1"
+              (click)="forgotpass()"
+              >Forget Password ?</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

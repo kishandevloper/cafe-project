@@ -1,0 +1,45 @@
+<div class="dmain">
+  <div class="card bg-light mt-3 mb-4 p-3">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th class="text-center">Order_id</th>
+              <th class="text-center">Payment_id</th>
+
+              <th class="text-center">Payment</th>
+
+              <th class="text-center">Delever By</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let order of allorders">
+            <tr>
+              <td class="text-center tbl-property pt-3">
+                {{ order.order_id }}
+              </td>
+              <td class="text-center tbl-property pt-3">
+                {{ order.payment_id }}
+              </td>
+
+              <td class="text-center tbl-property pt-3">
+                {{ order.payment }} Rs
+              </td>
+
+              <td class="text-center tbl-property pt-3">Kishan Patel</td>
+              <td class="text-center tbl-property pt-3">
+                <button class="btn btn-sm btn-success mt-1">Approved</button>
+                <button class="btn btn-sm btn-secondary ms-1 mt-1">
+                  <i class="fa-sharp fa-solid fa-eye">&nbsp;</i>View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+

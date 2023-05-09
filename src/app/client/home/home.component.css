@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap");
+.imag-wrapper img {
+  width: 100%;
+  transform: scale(1);
+  transition: all 0.8s ease-in;
+  height: 300px;
+}
+.imag-wrapper {
+  overflow: hidden;
+  width: 95%;
+  margin: 0 auto;
+  display: block;
+  margin-top: 3px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card {
+  display: block;
+
+  position: relative;
+  transform: scale(1);
+}
+
+.info {
+  background-color: bisque;
+  font-family: "Kanit", sans-serif;
+
+  border-radius: 5px;
+  margin-top: -10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -3px;
+  height: 64px;
+}
+.info p {
+  color: brown;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding-left: 8px;
+  line-height: 23px;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0e0ff;
+  height: 64px;
+}
+
+.card:hover .imag-wrapper img {
+  transition: all 0.8s ease-in;
+  opacity: 0.8;
+  transform: scale(1.09);
+}
+.buttonx {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: -90px;
+  align-items: center;
+  transition: all 0.6s ease-in;
+  height: 70px;
+  background-color: #d07a3cc4;
+}
+.card:hover .buttonx {
+  margin-bottom: 0px;
+  transition: all 0.6s ease-in;
+}
+.item-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 562px) {
+  .info p {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (max-width: 300px) {
+  .info p {
+    font-size: 1.1rem;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .info p {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (max-width: 1800px) {
+  .imag-wrapper {
+    height: 220px;
+  }
+  .imag-wrapper img {
+    height: 220px;
+  }
+}
+
+@media screen and (max-width: 1100px) and (min-width : 800px){
+  .imag-wrapper {
+    height: 200px;
+  }
+  .imag-wrapper img {
+    height: 200px;
+  }
+}
+
+.content {
+  height: calc(100vh - 95px);
+  background: transparent;
+
+  margin: 12px;
+  border-radius: 15px;
+  margin-left: 21px;
+}
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: aliceblue;
+}
+
+.not-found {
+  height: 200px;
+
+  background-color: #ffffff99;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.not-found h1 {
+  font-family: "Kanit", sans-serif;
+  font-weight: 600;
+  font-size: 35px;
+}

@@ -1,0 +1,334 @@
+<ngx-ui-loader></ngx-ui-loader>
+<mat-toolbar>
+  <div>
+    <button
+      mat-icon-button
+      *ngIf="sidenav.mode === 'over'"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
+      <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    </button>
+    <img
+      class="logo"
+      *ngIf="sidenav.mode === 'side'"
+      src="../../../assets/logo.jpg"
+      alt=""
+    />
+    <span class="title">Drew cafe</span>
+  </div>
+  <div class="cart">
+    <a
+      mat-icon-button
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      (click)="getcartitems()"
+    >
+      <mat-icon>shopping_cart</mat-icon>
+    </a>
+    <sup style="margin-left: -8px">{{ cartitems.length }}</sup>
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" >
+  Launch demo modal
+</button> -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header d-flex justify-content-between">
+            <p></p>
+
+            <button mat-icon-button data-bs-dismiss="modal" aria-label="Close">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="cartitems.length != 0" class="modal-body">
+            <div
+              class="card col-11 col-sm-10 col-md-10 col-lg-10 m-auto px-4 pb-4 cart-box"
+            >
+              <div
+                class="d-flex justify-content-center"
+                style="font-size: 15px"
+              >
+                <p class="p-0 m-0">payment</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p>Amount</p>
+                <p>&#8377;{{ totalprice }}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p>GST <span style="font-size: 19px">(5%)</span></p>
+                <p class="text-success">+ &#8377;{{ gst }}</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p>Discount</p>
+                <p class="text-danger">- &#8377;30</p>
+              </div>
+              <mat-divider class="m-0"></mat-divider>
+              <div class="d-flex justify-content-between">
+                <p>Total</p>
+                <p>
+                  <span
+                    class="ms-2"
+                    style="
+                      text-decoration: line-through;
+                      font-size: 15px;
+                      color: #8b8b8b;
+                    "
+                    >&#8377;{{ calcamount + 30 }}</span
+                  >&#8377;{{ calcamount }}
+                </p>
+              </div>
+              <button
+                style="width: 100%"
+                class="btn btn-success d-block"
+                data-bs-toggle="modal"
+                data-bs-target="#paymodal"
+              >
+                Proceed to pay
+              </button>
+            </div>
+
+            <div *ngFor="let item of cartitems">
+              <mat-divider style="background-color: blueviolet"></mat-divider>
+              <div class="box row">
+                <div class="col-5 col-sm-5 col-md-5 col-lg-5">
+                  <img src="{{ item.imagesrc }}" alt="" />
+
+                  <div class="q-box d-flex mt-3">
+                    <button class="btn" (click)="changequantity(item, true)">
+                      <mat-icon>add_circle</mat-icon>
+                    </button>
+                    <span>{{ item.quantity }}</span>
+                    <button
+                      *ngIf="item.quantity > 1"
+                      class="btn"
+                      (click)="changequantity(item, false)"
+                    >
+                      <mat-icon>remove_circle</mat-icon>
+                    </button>
+                    <button *ngIf="item.quantity == 1" class="btn">
+                      <mat-icon>remove_circle</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-7 col-sm-7 col-md-4 col-lg-4 item-info">
+                  <h1>{{ item.item_name }}</h1>
+                  <span>{{ item.description }} </span>
+                  <p>&#8377; {{ item.price }} <span>+ 5% GST</span></p>
+                  <mat-radio-group
+                    style="margin-left: -12px"
+                    class="mt-2 d-block"
+                    color="primary"
+                  >
+                    <mat-radio-button
+                      checked
+                      value="1"
+                      (change)="addcheese($event, item)"
+                      >Butter</mat-radio-button
+                    >
+                    <mat-radio-button
+                      value="2"
+                      (change)="addcheese($event, item)"
+                      >Cheese</mat-radio-button
+                    >
+                  </mat-radio-group>
+                  <span *ngIf="item.isenable" class="text-success"
+                    >In stock</span
+                  >
+                  <span *ngIf="!item.isenable" class="text-danger"
+                    >Out stock</span
+                  >
+                  <div class="btns">
+                    <button
+                      mat-button
+                      color="basic"
+                      (click)="deletecartitem(item._id)"
+                    >
+                      Delete
+                    </button>
+                    <button mat-button color="basic">Save For letter</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="cartitems.length == 0" class="modal-body">
+            <div class="card col-10 m-auto mt-3">
+              <img
+                style="width: 100%"
+                src="https://media1.giphy.com/media/jtECu4KjK3cqiAUMyR/giphy.gif?cid=ecf05e470cukcqneqqbojgjirxiiqcv7o4c8rvg9du0ghncg&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+                alt=""
+              />
+            </div>
+            <h1 class="text-center mt-2">Cart is Empty</h1>
+          </div>
+
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav mode="over" #sidenav>
+    <!-- <p>mode="over"</p> -->
+    <img class="avatar mat-elevation-z8" src="{{ user.profile }}" alt="" />
+    <h4 class="name mt-3">{{ user.name }}</h4>
+    <p class="designation">{{ user.role }}</p>
+
+    <mat-divider></mat-divider>
+
+    <button
+      mat-button
+      color="basic"
+      class="menu-button"
+      routerLink="/index/home"
+      (click)="navclose()"
+    >
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button
+      mat-button
+      color="basic"
+      class="menu-button"
+      routerLink="/index/profile"
+      (click)="navclose()"
+    >
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button
+      mat-button
+      color="basic"
+      class="menu-button"
+      routerLink="/index/orders"
+      (click)="navclose()"
+    >
+      <mat-icon>info</mat-icon>
+      <span>My orders</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button color="basic" class="menu-button" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="paymodal"
+  tabindex="-1"
+  aria-labelledby="paymodalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div
+        class="modal-header row d-flex justify-content-center align-items-center"
+      >
+        <div class="col-9 text-center mt-3"><h1>Delivery details</h1></div>
+        <div class="col-3 d-flex flex-end justify-content-center">
+          <button
+            mat-icon-button
+            data-bs-target="#exampleModal"
+            data-bs-toggle="modal"
+            data-bs-dismiss="modal"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body mt-1">
+        <div class="col-12">
+          <form action="" [formGroup]="paymentform">
+            <div class="form-group">
+              <label class="ms-1" for="">Name</label>
+              <input
+                class="form-control mt-1"
+                formControlName="name"
+                placeholder="Enter Name"
+              />
+              <span
+                class="err"
+                *ngIf="
+                  paymentform.controls['name'].touched &&
+                  paymentform.controls['name'].invalid
+                "
+                >Name is required</span
+              >
+            </div>
+            <div class="form-group mt-2">
+              <label class="ms-1" for="">Contact No</label>
+              <input
+                formControlName="contact"
+                placeholder="Enter contact no"
+                class="form-control mt-1"
+              />
+              <span
+                class="err"
+                *ngIf="
+                  paymentform.controls['contact'].touched &&
+                  paymentform.controls['contact'].invalid
+                "
+                >contact no is required</span
+              >
+            </div>
+            <div class="form-group mt-2">
+              <label class="ms-1" for="">Address</label>
+              <textarea
+                formControlName="address"
+                rows="3"
+                placeholder="Enter Delivery Address"
+                class="form-control mt-1"
+              ></textarea>
+              <span
+                class="err"
+                *ngIf="
+                  paymentform.controls['address'].touched &&
+                  paymentform.controls['address'].invalid
+                "
+                >Adress is required</span
+              >
+            </div>
+            <button
+              [disabled]="!paymentform.valid"
+              type="button"
+              class="btn btn-success d-block mt-3"
+              style="width: 100%"
+              (click)="pay(calcamount)"
+            >
+              <i class="fa fa-shopping-cart"></i>&nbsp; Buy
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          #closebutton
+          data-bs-toggle="modal"
+          style="display: none"
+        >
+          Back
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

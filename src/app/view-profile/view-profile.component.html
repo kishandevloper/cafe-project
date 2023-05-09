@@ -1,0 +1,42 @@
+<div class="row d-flex align-items-center justify-content-center mt-4">
+  <div class="col-md-7 col-lg-5 col-sm-8 col-11">
+    <div class="card mt-2">
+      <div class="card-body d-flex justify-content-between flex-column">
+        <img
+          class="user-profile rounded-circle"
+          src="{{ userdata.profile }}"
+          alt=""
+          srcset=""
+        />
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="list-group mt-4 col-sm-11 col-lg-11 col-12">
+            <a
+              class="list-group-item list-group-item-action list-group-item-success"
+            >
+              <div class="row">
+                <div class="col-3">Name :</div>
+                <div class="col-9">{{ userdata.name }}</div>
+              </div>
+            </a>
+            <a
+              class="list-group-item list-group-item-action list-group-item-success"
+            >
+              <div class="row">
+                <div class="col-3">Email :</div>
+                <div class="col-9">{{ userdata.email }}</div>
+              </div>
+            </a>
+            <a
+              class="list-group-item list-group-item-action list-group-item-success"
+            >
+              <div class="row">
+                <div class="col-3">Status:</div>
+                <div class="col-9">{{ userdata.role }}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

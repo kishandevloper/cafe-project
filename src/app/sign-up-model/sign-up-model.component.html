@@ -1,0 +1,175 @@
+<h1 *ngIf="!data.isaddemp" mat-dialog-title class="text-center">
+  Sign up for drew's cafe
+</h1>
+<h1 *ngIf="data.isaddemp" mat-dialog-title class="text-center">
+  Add Delivery boy
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="signupform">
+    <div class="row">
+      <div class="col-sm-6 col-md-6 col-12">
+        <mat-form-field class="example-full-width" style="width: 100%">
+          <mat-label>Name :</mat-label>
+          <input
+            matInput
+            placeholder="Ex. Kishan kathirya"
+            formControlName="name"
+            autocomplete="off"
+          /><mat-error
+            style="font-size: 13px"
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            >Please enter name</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6 col-md-6 col-12">
+        <mat-form-field class="example-full-width" style="width: 100%">
+          <mat-label>Email :</mat-label>
+          <input
+            matInput
+            placeholder="Ex. kishankathiriya2004@gmail.com"
+            formControlName="email"
+            autocomplete="off"
+          />
+          <mat-error
+            style="font-size: 13px"
+            *ngIf="
+              signupform.controls['email'].invalid &&
+              (signupform.controls['email'].dirty ||
+                signupform.controls['email'].touched)
+            "
+          >
+            <span *ngIf="signupform.controls['email'].errors['required']">
+              email is required
+            </span>
+
+            <span *ngIf="signupform.controls['email'].errors['email']"
+              >Please enter a valid email address</span
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 col-md-12 col-12">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-12">
+            <div class="col-12">
+              <mat-form-field class="example-full-width" style="width: 100%">
+                <mat-label>password :</mat-label>
+                <input
+                  type="password"
+                  matInput
+                  placeholder="Enter password"
+                  formControlName="password"
+                  autocomplete="off"
+                />
+                <mat-error
+                  style="font-size: 13px"
+                  *ngIf="
+                    signupform.controls['password'].invalid &&
+                    signupform.controls['password'].touched
+                  "
+                >
+                  <span
+                    *ngIf="signupform.controls['password'].errors['required']"
+                    >Password is required</span
+                  >
+                  <span
+                    *ngIf="signupform.controls['password'].errors['minlength']"
+                    >Password must be at least 6 characters long</span
+                  >
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <mat-form-field class="example-full-width" style="width: 100%">
+                <mat-label> Confirm password :</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  placeholder="Enter confirm password"
+                  formControlName="confirm_pass"
+                />
+                <mat-error
+                  style="font-size: 13px"
+                  *ngIf="
+                    signupform.controls['confirm_pass'].invalid &&
+                    signupform.controls['confirm_pass'].touched
+                  "
+                >
+                  <span
+                    *ngIf="
+                      signupform.controls['confirm_pass'].errors[
+                        'passwordMismatch'
+                      ]
+                    "
+                    >Confirm Password must be same</span
+                  >
+                  <span
+                    *ngIf="
+                      signupform.controls['confirm_pass'].errors['required']
+                    "
+                    >confirm Password is required</span
+                  >
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="ms-2">select a profile</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  accept="image/png, image/jpeg"
+                  (change)="changeimage($event)"
+                />
+              </div>
+              <mat-form-field
+                *ngIf="data.isaddemp"
+                class="example-full-width mt-2"
+                style="width: 100%"
+              >
+                <mat-label>Status :</mat-label>
+                <input
+                  matInput
+                  value="delevery -boy"
+                  placeholder="Ex. kishankathiriya2004@gmail.com"
+                  disabled="true"
+                  autocomplete="off"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-12">
+            <div class="col-md-12 col-md-12 col-12">
+              <img
+                *ngIf="imagesrc"
+                class="rounded-circle image"
+                src="{{ imagesrc }}"
+                alt=""
+              />
+              <img
+                *ngIf="!imagesrc"
+                class="rounded-circle image"
+                src="../../assets/user.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="signupform.invalid"
+    [mat-dialog-close]="[signupform.value, imagesrc]"
+    cdkFocusInitial
+    (click)="submitimage()"
+  >
+    Sign up
+  </button>
+</div>

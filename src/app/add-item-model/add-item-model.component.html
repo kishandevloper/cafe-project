@@ -1,0 +1,90 @@
+<h1 class="text-center" mat-dialog-title>{{ data.name }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="additemform" style="overflow: hidden">
+    <div class="col-md">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="item_name"
+          placeholder="enter Item Name"
+          name="item_name"
+          formControlName="item_name"
+          required
+        />
+        <label for="item_name">Item Name</label>
+      </div>
+    </div>
+    <div class="row g-2">
+      <div class="col-md">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            placeholder="Enter price"
+            name="price"
+            formControlName="price"
+            required
+          />
+          <label for="price">Price :</label>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <select
+            class="form-select"
+            id="category"
+            aria-label="Floating label select example"
+            name="category"
+            formControlName="category"
+            required
+          >
+            <option
+              selected
+              *ngFor="let option of data.option"
+              [value]="option"
+            >
+              {{ option }}
+            </option>
+          </select>
+          <label for="category">Category :</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-floating mt-2">
+      <textarea
+        class="form-control"
+        placeholder="Leave a comment here"
+        id="description"
+        style="height: 100px"
+        name="description"
+        formControlName="description"
+        required
+      ></textarea>
+      <label for="description">Description</label>
+    </div>
+    <div class="col-md mt-2">
+      <div class="form-floating">
+        <input type="file" class="form-control" id="image" accept="image/png,
+        image/jpeg" formControlName="image" (change)="imageChnaged($event)"
+        #fileInput/>
+        <label for="fileInput">Choose a file</label>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="[imagesrc, additemform.value, itemdata._id]"
+    cdkFocusInitial
+    [disabled]="additemform.invalid"
+  >
+    {{ data.isbutton }}
+  </button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+</div>

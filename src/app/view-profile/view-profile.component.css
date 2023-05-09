@@ -1,0 +1,61 @@
+.user-profile:hover {
+  transition: all 0.5s ease;
+
+  font-size: 30px;
+  border: 2px solid black;
+}
+.user-profile {
+  border: 3px solid #d6d6d6;
+  margin: 0 auto;
+  display: block;
+
+  transform: scale(1);
+
+  animation-duration: 5s;
+  animation-name: arrow;
+  animation-iteration-count: infinite;
+}
+@keyframes arrow {
+  0% {
+    transform: rotatey(0deg);
+  }
+  50% {
+    transform: rotateY(0deg);
+  }
+
+  75% {
+    transform: rotateY(180deg);
+  }
+
+  100% {
+    transform: rotatey(360deg);
+  }
+}
+.list-group-item {
+  font-size: 17px;
+}
+@media screen and (max-width: 902px) {
+  .list-group-item {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 383px) {
+  .list-group-item {
+    font-size: 12px;
+  }
+}
+.card-body img {
+  width: 80%;
+  height: 520px;
+}
+@media screen and (max-width: 1300px) {
+  .card-body img {
+    width: 80%;
+    height: 260px;
+  }
+}
+
+.card {
+  background-color: #ffffffba;
+}
