@@ -22,7 +22,7 @@ export class HomeComponent implements AfterViewInit {
 
   @ViewChild(MatSidenav) sidenav: MatSidenav;
   ngAfterViewInit() {
-    this.observer.observe(['(max-width : 1010px)']).subscribe((res) => {
+    this.observer.observe(['(max-width : 800px)']).subscribe((res) => {
       if (res.matches) {
         this.sidenav.mode = 'over';
         this.sidenav.close();
@@ -38,9 +38,11 @@ export class HomeComponent implements AfterViewInit {
       $('#btn1').on('click', function () {
         $('#managecafe').slideToggle('slow');
 
+
       });
       $('#btn2').on('click', function () {
         $('#onlineorders').slideToggle('slow');
+
 
       });
       $('#btn3').on('click', function () {
@@ -63,10 +65,6 @@ export class HomeComponent implements AfterViewInit {
     });
   }
 
-  close() {
-    if (this.sidenav) {
-    }
-  }
 
   constructor(
     private cookieservice: CookieService,
@@ -81,5 +79,5 @@ export class HomeComponent implements AfterViewInit {
     this.router.navigateByUrl('/login');
   }
 
-  jqurytoggle() {}
+
 }

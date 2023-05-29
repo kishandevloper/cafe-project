@@ -18,27 +18,29 @@
     <div *ngFor="let order of orders">
       <div class="card col-12 col-sm-11 col-lg-11 col-md-11 m-auto mb-2">
         <div class="card-body p-2 d-flex">
-          <div *ngIf="order.delevery.isdelvery">
-            <img
-              class="img"
-              src="https://i.pinimg.com/originals/19/cd/f3/19cdf3fb05aae1bf1a707204e7712c6c.gif"
-              alt=""
-            />
-            <p
-              class="p-1 mt-2 mb-0 text-center"
-              style="font-size: 20px; background-color: #d0dad0"
-            >
-              Deliverd
-              <i
-                style="color: rgb(46, 121, 46)"
-                class="fa-solid fa-circle-check d-status"
-              ></i>
-            </p>
-          </div>
+          <div *ngIf="userdetail.role == 'user' || userdetail.role == 'admin'">
+            <div *ngIf="order.delevery.isdelvery">
+              <img
+                class="img"
+                src="https://i.pinimg.com/originals/19/cd/f3/19cdf3fb05aae1bf1a707204e7712c6c.gif"
+                alt=""
+              />
+              <p
+                class="p-1 mt-2 mb-0 text-center"
+                style="font-size: 20px; background-color: #d0dad0"
+              >
+                Deliverd
+                <i
+                  style="color: rgb(46, 121, 46)"
+                  class="fa-solid fa-circle-check d-status"
+                ></i>
+              </p>
+            </div>
 
-          <div *ngIf="!order.delevery.isdelvery">
-            <img class="img" src="../../../assets/delivery.gif" alt="" />
-            <p class="p-1 mt-2 mb-0 text-center d-status">Delivery soon</p>
+            <div *ngIf="!order.delevery.isdelvery">
+              <img class="img" src="../../../assets/delivery.gif" alt="" />
+              <p class="p-1 mt-2 mb-0 text-center d-status">Delivery soon</p>
+            </div>
           </div>
 
           <div class="ps-1 ps-sm-3 ps-lg-3 ps-md-3 pt-3 pt-sm-2">
@@ -59,11 +61,23 @@
                 <td class="pe-2 fw-bold pt-0">Deliverd at :</td>
                 <td>{{ order.address }}</td>
               </tr>
+              <tr *ngIf="userdetail.role == 'deliveryboy'">
+                <td class="pe-2 fw-bold pt-0">Contact  :</td>
+                <td>{{ order.contact }}</td>
+              </tr>
             </table>
             <span class="text-success date"
               >{{ order.createdat | date : "d MMMM, h:mm a" }}
             </span>
           </div>
+        </div>
+        <div *ngIf="userdetail.role == 'deliveryboy'">
+          <button
+            class="btn btn-sm btn-success ms-3 mb-2"
+            (click)="openDialog()"
+          >
+            Complete
+          </button>
         </div>
       </div>
     </div>

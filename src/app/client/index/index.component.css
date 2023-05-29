@@ -266,3 +266,8 @@ mat-sidenav-content {
 .ng-invalid.ng-touched {
   border-color: red;
 }
+@media screen and (max-width: 450px) {
+  #hellouser {
+    display: none;
+  }
+}

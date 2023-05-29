@@ -7,6 +7,8 @@ import { ViewProfileComponent } from '../view-profile/view-profile.component';
 import { OrderService } from '../service/order.service';
 import { OrdersComponent } from './orders/orders.component';
 
+
+
 const routes: Routes = [
   {
     path: '',
@@ -17,6 +19,8 @@ const routes: Routes = [
       { path: 'profile', component: ViewProfileComponent },
 
       { path: 'orders', component: OrdersComponent },
+      
+
     ],
   },
 ];

@@ -1,45 +1,148 @@
 <div class="dmain">
   <div class="card bg-light mt-3 mb-4 p-3">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-responsive">
-          <thead>
-            <tr>
-              <th class="text-center">Order_id</th>
-              <th class="text-center">Payment_id</th>
-
-              <th class="text-center">Payment</th>
-
-              <th class="text-center">Delever By</th>
-              <th class="text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let order of allorders">
-            <tr>
-              <td class="text-center tbl-property pt-3">
-                {{ order.order_id }}
-              </td>
-              <td class="text-center tbl-property pt-3">
-                {{ order.payment_id }}
-              </td>
-
-              <td class="text-center tbl-property pt-3">
-                {{ order.payment }} Rs
-              </td>
-
-              <td class="text-center tbl-property pt-3">Kishan Patel</td>
-              <td class="text-center tbl-property pt-3">
-                <button class="btn btn-sm btn-success mt-1">Approved</button>
-                <button class="btn btn-sm btn-secondary ms-1 mt-1">
-                  <i class="fa-sharp fa-solid fa-eye">&nbsp;</i>View
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <form [formGroup]="range" class="row" action="">
+      <div
+        class="form-group col-12 col-sm-5 col-md-5 col-lg-5 col-xl-4 mt-3 mt-sm-3 mt-lg-3 mt-md-3 m-auto mt-xl-0"
+      >
+        <label class="ms-2 fw-bold" style="font-size: 15px" for="fromdate"
+          >From :</label
+        >
+        <input
+          class="dateadded"
+          formControlName="start"
+          type="date"
+          class="form-control"
+        />
       </div>
+      <div
+        class="form-group col-12 col-sm-5 col-md-5 col-lg-5 col-xl-4 mt-3 mt-sm-3 mt-lg-3 mt-md-3 m-auto mt-xl-0"
+      >
+        <label class="ms-2 fw-bold" style="font-size: 15px" for="fromdate"
+          >To :</label
+        >
+        <input
+          id="max"
+          formControlName="end"
+          type="date"
+          class="form-control"
+        />
+      </div>
+      <div
+        class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-4 d-flex justify-content-sm-center justify-content-between align-items-center m-auto"
+      >
+        <button class="btn-md btn mt-3 btn-success" (click)="applyDateFilter()">
+          <i class="fa-solid fa-magnifying-glass">&nbsp;</i>&nbsp;Search
+        </button>
+        <button
+          class="btn-md btn ms-4 mt-3 ms-xl-4 btn-danger"
+          (click)="removefilter()"
+        >
+          <i class="fa-solid fa-calendar-xmark">&nbsp;</i>&nbsp;clear
+        </button>
+        <button
+          class="btn-md btn ms-4 mt-3 ms-xl-4 btn-secondary"
+          (click)="todayfilter()"
+        >
+          <i class="fa-solid fa-rectangle-list">&nbsp;</i>&nbsp;today orders
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card bg-light mt-3 mb-4 p-3">
+    <div class="table-responsive">
+      <table
+        class="table table-responsive"
+        id="dataTables-example"
+        datatable
+        [dtTrigger]="dtTrigger"
+        [dtOptions]="dtOptions"
+      >
+        <thead class="bg-dark">
+          <tr>
+            <th class="text-center">Order_id</th>
+            <th class="text-center">Payment_id</th>
+            <th class="text-center">Payment</th>
+            <th style="min-width: 115px" class="text-center">Delevery name</th>
+            <th class="text-center">Action</th>
+            <th class="text-center">view</th>
+            <th class="text-center">deliverd</th>
+            <th class="text-center">order_date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of filteredData">
+            <td class="text-center tbl-property pt-3">
+              {{ order.order_id }}
+            </td>
+            <td class="text-center tbl-property pt-3">
+              {{ order.payment_id }}
+            </td>
+
+            <td class="text-center tbl-property pt-3">
+              {{ order.payment }} Rs
+            </td>
+
+            <td
+              class="text-center tbl-property pt-3"
+              *ngIf="order.delevery.deleveryby !== ''"
+            >
+              {{ order.delevery.deleveryby.name }}
+            </td>
+            <td
+              class="text-center tbl-property pt-3"
+              *ngIf="order.delevery.deleveryby == ''"
+            >
+              <button
+                class="btn btn-sm btn-danger mt-1"
+                style="min-width: 100px"
+                (click)="selectdelivery(order)"
+              >
+                select delivery
+              </button>
+            </td>
+            <td class="text-center tbl-property pt-3">
+              <span style="display: none">{{ order.isapprove }}</span>
+              <button
+                *ngIf="order.isapprove"
+                class="btn btn-sm btn-success mt-1"
+                style="min-width: 100px"
+              >
+                Accepted &nbsp;<i class="fa-solid fa-circle-check"></i>
+              </button>
+              <button
+                *ngIf="!order.isapprove"
+                class="btn btn-sm btn-secondary mt-1"
+                (click)="updateorder(order)"
+              >
+                Accepte
+              </button>
+            </td>
+            <td class="text-center tbl-property pt-3">
+              <button
+                class="btn btn-sm btn-secondary mt-1"
+                (click)="openDialog(order)"
+                style="min-width: 71px"
+              >
+                View &nbsp;<i class="fa-sharp fa-solid fa-eye"></i>
+              </button>
+            </td>
+
+            <td class="text-center tbl-property pt-3">
+              <span style="display: none">{{ order.delevery.isdelvery }}</span>
+              <i
+                *ngIf="order.delevery.isdelvery"
+                class="fa-solid fa-check bg-success text-light"
+                style="border-radius: 10px; padding: 5px"
+              ></i>
+              <p class="text-danger" *ngIf="!order.delevery.isdelvery">-</p>
+            </td>
+            <td class="text-center tbl-property pt-3" style="min-width: 100px">
+              {{ order.createdat | date : "d MMM ,y h:mm a" }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-
-

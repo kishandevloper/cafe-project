@@ -163,6 +163,7 @@
 <div mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
   <button
+    *ngIf="!data.isaddemp"
     mat-raised-button
     color="primary"
     [disabled]="signupform.invalid"
@@ -171,5 +172,16 @@
     (click)="submitimage()"
   >
     Sign up
+  </button>
+  <button
+    *ngIf="data.isaddemp"
+    mat-raised-button
+    color="primary"
+    [disabled]="signupform.invalid"
+    [mat-dialog-close]="[signupform.value, imagesrc]"
+    cdkFocusInitial
+    (click)="submitimage()"
+  >
+    <i class="fa-solid fa-square-plus">&nbsp;</i> create
   </button>
 </div>

@@ -1,0 +1,87 @@
+<h1 mat-dialog-title class="text-center">Order Detail</h1>
+<div mat-dialog-content>
+  <div class="col-12">
+    <table class="table table-responsive table-bordered m-auto">
+      <tbody>
+        <tr>
+          <th class="text-center">order_id</th>
+          <td class="text-center tbl-property">
+            {{ data.order_detail.order_id }}
+          </td>
+        </tr>
+        <tr>
+          <th class="text-center">payment_id</th>
+          <td class="tbl-property text-center">
+            {{ data.order_detail.payment_id }}
+          </td>
+        </tr>
+        <tr>
+          <th class="text-center">Address</th>
+          <td class="tbl-property text-center">
+            {{ data.order_detail.address }}
+          </td>
+        </tr>
+        <tr>
+          <th class="text-center">delevery by</th>
+          <td class="text-center tbl-property">
+            {{ data.order_detail.delevery.deleveryby.name }}
+          </td>
+        </tr>
+        <tr>
+          <th class="text-center">delevery</th>
+          <td
+            *ngIf="data.order_detail.delevery.isdelvery"
+            class="text-center tbl-property text-success"
+          >
+            Successfull
+          </td>
+          <td
+            *ngIf="!data.order_detail.delevery.isdelvery"
+            class="text-center tbl-property text-danger"
+          >
+            Unsuccessfull
+          </td>
+        </tr>
+        <tr>
+          <th class="text-center">delevery Time</th>
+          <td
+            *ngIf="data.order_detail.delevery.isdelvery"
+            class="text-center tbl-property"
+          >
+            {{ data.order_detail.delevery.delevryat | date : "d MMM ,y h:mm a"  }}
+          </td>
+          <td
+            *ngIf="!data.order_detail.delevery.isdelvery"
+            class="text-center tbl-property text-danger"
+          >
+            -
+          </td>
+        </tr>
+
+        <tr>
+          <th class="text-center">Recieve by</th>
+          <td
+            *ngIf="data.order_detail.delevery.isdelvery"
+            class="text-center tbl-property"
+          >
+            <img
+              src="{{ data.order_detail.delevery.signature }}"
+              height="200px"
+              alt=""
+            />
+          </td>
+          <td
+            *ngIf="!data.order_detail.delevery.isdelvery"
+            class="text-center tbl-property text-danger"
+          >
+            -
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

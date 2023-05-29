@@ -17,7 +17,27 @@
     />
     <span class="title">Drew cafe</span>
   </div>
-  <div class="cart">
+  <div *ngIf="user.role == 'deliveryboy'" class="cart">
+    <img
+      *ngIf="user.profile !== ''"
+      width="35px"
+      class="rounded-circle"
+      src="{{ user.profile }}"
+      alt=""
+    />
+    <img
+      *ngIf="user.profile == ''"
+      width="35px"
+      class="rounded-circle"
+      src="../../../assets/user.png"
+      alt=""
+    />
+    <span class="ms-2" id="hellouser" style="font-size: 15px"
+      >Hello {{ user.name }}</span
+    >
+  </div>
+
+  <div *ngIf="user.role !== 'deliveryboy'" class="cart">
     <a
       mat-icon-button
       data-bs-toggle="modal"
@@ -180,42 +200,67 @@
 <mat-sidenav-container>
   <mat-sidenav mode="over" #sidenav>
     <!-- <p>mode="over"</p> -->
-    <img class="avatar mat-elevation-z8" src="{{ user.profile }}" alt="" />
+    <img
+      *ngIf="user.profile !== ''"
+      class="avatar mat-elevation-z8"
+      src="{{ user.profile }}"
+      alt=""
+    />
+    <img
+      *ngIf="user.profile == ''"
+      class="avatar mat-elevation-z8"
+      src="../../../assets/user.png"
+      alt=""
+    />
+
     <h4 class="name mt-3">{{ user.name }}</h4>
     <p class="designation">{{ user.role }}</p>
 
-    <mat-divider></mat-divider>
-
-    <button
-      mat-button
-      color="basic"
-      class="menu-button"
-      routerLink="/index/home"
-      (click)="navclose()"
-    >
-      <mat-icon>home</mat-icon>
-      <span>Home</span>
-    </button>
-    <button
-      mat-button
-      color="basic"
-      class="menu-button"
-      routerLink="/index/profile"
-      (click)="navclose()"
-    >
-      <mat-icon>person</mat-icon>
-      <span>Profile</span>
-    </button>
-    <button
-      mat-button
-      color="basic"
-      class="menu-button"
-      routerLink="/index/orders"
-      (click)="navclose()"
-    >
-      <mat-icon>info</mat-icon>
-      <span>My orders</span>
-    </button>
+    <div *ngIf="user.role == 'user' || user.role == 'admin'">
+      <mat-divider></mat-divider>
+      <button
+        mat-button
+        color="basic"
+        class="menu-button"
+        routerLink="/index/home"
+        (click)="navclose()"
+      >
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button
+        mat-button
+        color="basic"
+        class="menu-button"
+        routerLink="/index/profile"
+        (click)="navclose()"
+      >
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+      <button
+        mat-button
+        color="basic"
+        class="menu-button"
+        routerLink="/index/orders"
+        (click)="navclose()"
+      >
+        <mat-icon>info</mat-icon>
+        <span>My orders</span>
+      </button>
+    </div>
+    <div *ngIf="user.role == 'deliveryboy'">
+      <button
+        mat-button
+        color="basic"
+        class="menu-button"
+        routerLink="/index/orders"
+        (click)="navclose()"
+      >
+        <mat-icon>info</mat-icon>
+        <span>My orders</span>
+      </button>
+    </div>
     <mat-divider></mat-divider>
     <button mat-button color="basic" class="menu-button" (click)="logout()">
       <mat-icon>logout</mat-icon>

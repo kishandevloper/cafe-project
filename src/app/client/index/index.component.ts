@@ -36,8 +36,11 @@ export class IndexComponent implements AfterViewInit {
     private ngxloader: NgxUiLoaderService
   ) {
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.getcartitems();
-    this.counttotal();
+    if (this.user.role == 'admin' || this.user.role == 'user') {
+      this.getcartitems();
+      this.counttotal();
+    }
+
     this.paymentform = this.fb.group({
       name: [this.user.name, Validators.required],
       contact: ['', Validators.required],
@@ -91,7 +94,6 @@ export class IndexComponent implements AfterViewInit {
           return item._id != itemid;
         });
         this.counttotal();
-
       }
     });
   }
@@ -127,7 +129,7 @@ export class IndexComponent implements AfterViewInit {
       this.ngxloader.stop();
       console.log(res);
       const options: any = {
-        key: 'rzp_test_ajIN8w1f0JnoPa',
+        key: 'rzp_test_Mo1tBxTl93wZQ9',
         amount: res.amount * 100, // amount should be in paise format to display Rs 1255 without decimal point
         currency: 'INR',
         name: 'Drew cafe', // company name or product name
@@ -166,23 +168,28 @@ export class IndexComponent implements AfterViewInit {
                 delevery: {
                   deleveryby: '',
                   delevryat: '',
+                  signature: '',
                 },
+                isapprove: false,
               };
 
               this.orderser.createorder(payload).subscribe((res: any) => {
                 if (res.isordercreate) {
-                  this.closebutton.nativeElement.click();
-                  this.router.navigateByUrl('/index/orders');
-                  this.ngxloader.stop();
+                  console.log(res);
+                  this.orderser.selectdelivery(res.orderid).subscribe((res) => {
+                    this.closebutton.nativeElement.click();
+                    this.router.navigateByUrl('/index/orders');
+                    this.ngxloader.stop();
 
-                  setTimeout(function () {
-                    Swal.fire({
-                      icon: 'success',
-                      title: 'order successfull',
-                      showConfirmButton: false,
-                      timer: 1500,
-                    });
-                  }, 1000);
+                    setTimeout(function () {
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'order successfull',
+                        showConfirmButton: false,
+                        timer: 1500,
+                      });
+                    }, 1000);
+                  });
                 } else {
                   Swal.fire({
                     icon: 'error',

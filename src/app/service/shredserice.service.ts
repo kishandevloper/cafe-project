@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ShredsericeService {
-// ip_adress = '192.168.29.219';
-  ip_adress = 'localhost';
+  ip_adress = '192.168.29.219';
+  // ip_adress = 'localhost';
   constructor() {}
 }

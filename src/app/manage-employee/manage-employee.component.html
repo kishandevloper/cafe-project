@@ -5,7 +5,11 @@
         class="d-flex align-items-center justify-content-between bg-light p-2"
       >
         <span class="head ms-2 position-sticky">Manage Employee</span>
-        <button class="btn btn-sm btn-success" role="button" (click)="openDialog()">
+        <button
+          class="btn btn-sm btn-success"
+          role="button"
+          (click)="openDialog()"
+        >
           <i class="fa-solid fa-plus"> &nbsp;</i> Add Employee
         </button>
       </div>
@@ -17,6 +21,44 @@
         <mat-label>Filter</mat-label>
         <input matInput placeholder="Search Empolyee" />
       </mat-form-field>
+    </div>
+  </div>
+  <div class="card bg-light mt-3 mb-4 p-3">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-responsive">
+          <thead>
+            <tr>
+              <th class="text-center">Emp_id</th>
+              <th class="text-center">Name</th>
+
+              <th class="text-center">Role</th>
+
+              <th class="text-center">status</th>
+              <th class="text-center">working on</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let employee of employee">
+            <tr>
+              <td class="text-center tbl-property pt-3">
+                {{ employee._id }}
+              </td>
+              <td class="text-center tbl-property pt-3">{{ employee.name }}</td>
+
+              <td class="text-center tbl-property pt-3">{{ employee.role }}</td>
+
+              <td class="text-center tbl-property pt-3">
+                <p class="text-success" *ngIf="employee.isfree">Free</p>
+                <p class="text-danger" *ngIf="!employee.isfree">Busy</p>
+              </td>
+              <td class="text-center tbl-property pt-3">
+                <p *ngIf="!employee.isfree">{{ employee.workingon }}</p>
+                <p class="text-danger" *ngIf="employee.isfree">-</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

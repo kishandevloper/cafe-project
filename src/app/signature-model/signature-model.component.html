@@ -1,0 +1,23 @@
+<h1 class="text-center ms-1 text-primary">customer signature</h1>
+<div mat-dialog-content>
+  <signature-pad
+    class="signature-pad"
+    [options]="signaturePadOptions"
+    (onBeginEvent)="clearSignature()"
+  ></signature-pad>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="clearSignature()">
+    Clear
+  </button>
+  <button mat-raised-button color="primary" (click)="saveSignature()">
+    Save
+  </button>
+  <button
+    class="ms-2 btn btn-success"
+    [mat-dialog-close]="signatureimg"
+    cdkFocusInitial
+  >
+    Complete
+  </button>
+</div>

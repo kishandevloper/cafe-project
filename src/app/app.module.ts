@@ -25,7 +25,6 @@ import { AddItemModelComponent } from './add-item-model/add-item-model.component
 import { MatButtonModule } from '@angular/material/button';
 import { ShowbillModelComponent } from './showbill.model/showbill.model.component';
 
-
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import {
   NgxUiLoaderConfig,
@@ -57,6 +56,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ManageEmployeeComponent } from './manage-employee/manage-employee.component';
+import { OrderModelComponent } from './order-model/order-model.component';
+import { DataTablesModule } from 'angular-datatables';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +77,8 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
     CPasswordComponent,
     AllOrdersComponent,
     ManageEmployeeComponent,
+    OrderModelComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -95,14 +99,14 @@ import { ManageEmployeeComponent } from './manage-employee/manage-employee.compo
     MatDividerModule,
     MatSidenavModule,
     MatToolbarModule,
-   
+    DataTablesModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorInterceptor,
       multi: true,
-    },
+    }
   ],
   bootstrap: [AppComponent],
 })

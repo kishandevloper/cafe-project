@@ -25,9 +25,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private ngxService: NgxUiLoaderService,
     private cookie: CookieService,
-    private router: Router,
-
-
+    private router: Router
   ) {}
 
   loginform = this.fb.group({
@@ -51,7 +49,10 @@ export class LoginComponent {
             this.ngxService.stop();
           }
           if (res.role == 'user') {
-            this.router.navigateByUrl('/index');
+            this.router.navigateByUrl('/index/home');
+          }
+          if (res.role == 'deliveryboy') {
+            this.router.navigateByUrl('/index/orders');
           }
         }
       },

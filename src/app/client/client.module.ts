@@ -14,15 +14,12 @@ import { HomeComponent } from './home/home.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdersComponent } from './orders/orders.component';
-
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
-import {
-  NgxUiLoaderConfig,
-  SPINNER,
-  POSITION,
-  PB_DIRECTION,
-} from 'ngx-ui-loader';
+import { SignaturePadModule } from 'angular2-signaturepad';
+import { NgxUiLoaderConfig, SPINNER, PB_DIRECTION } from 'ngx-ui-loader';
 
+import { SignatureModelComponent } from '../signature-model/signature-model.component';
+import { MatDialogModule } from '@angular/material/dialog';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   // bgsColor: "red",
   // bgsPosition: POSITION.bottomCenter,
@@ -38,7 +35,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 };
 
 @NgModule({
-  declarations: [IndexComponent, HomeComponent, OrdersComponent],
+  declarations: [IndexComponent, HomeComponent, OrdersComponent , SignatureModelComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
@@ -52,6 +49,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     FormsModule,
     ReactiveFormsModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    SignaturePadModule ,
+    MatDialogModule
   ],
 })
 export class ClientModule {}
